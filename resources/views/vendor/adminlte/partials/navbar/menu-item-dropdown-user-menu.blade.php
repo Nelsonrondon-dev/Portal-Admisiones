@@ -35,7 +35,7 @@
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
                 @if(!config('adminlte.usermenu_image')) h-auto @endif">
                 @if(config('adminlte.usermenu_image'))
-                    <img src="{{ Auth::user()->adminlte_image() }}"
+                    <img src="{{ Auth()->user()->adminlte_image() }}"
                          class="img-circle elevation-2"
                          alt="{{ Auth::user()->name }}">
                 @endif
@@ -46,6 +46,7 @@
                     @endif
                 </p>
             </li>
+
         @else
             @yield('usermenu_header')
         @endif

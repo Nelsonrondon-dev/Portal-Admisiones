@@ -25,6 +25,10 @@ Route::get('/home', function() {
 
 Auth::routes();
 
+
+Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 

@@ -13,31 +13,29 @@
     @yield('css')
 @stop
 
-@section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
+@section('classes_body'){{ ($auth_type ?? 'sidebar-') . '-mini' }}@stop
 
 
 
 
 @section('body')
 
+
 <div class="row">
     <div class="col-12">
-        <nav class="navbar navbar-expand navbar-primary navbar-dark">
+        <nav class="navbar navbar-expand navbar-primary navbar-dark" style="background-color: #01385e;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a href="/" class="brand-link mb-2">
+                  <img src="https://www.eadic.info/wp-content/uploads/2021/08/Eadic-Online-Blanco.png" alt="AdminLTE Logo" class="brand-image " style="max-height: 60px;" >
+                </a>
               </li>
-              <li class="nav-item d-none d-sm-inline-block">
-                <a href="../../index3.html" class="nav-link">Home</a>
-              </li>
-              <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-              </li>
+             
             </ul>
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
+            {{-- <ul class="navbar-nav ml-auto">
               <!-- Navbar Search -->
               <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" data-target="#navbar-search3" href="#" role="button">
@@ -157,49 +155,84 @@
                   <i class="fas fa-th-large"></i>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </nav>
+
+
+          @if (session('info'))
+          <div class="container mt-5">
+              <div class="row">
+                  <div class="col">
+                      <div class="alert alert-danger" role="alert">
+                          <strong>{{session('info')}}</strong>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          @endif
+
+
     </div>
     
 </div>
 
-    <div class="{{ $auth_type ?? 'login' }}-box">
 
-        {{-- Logo --}}
-        <div class="{{ $auth_type ?? 'login' }}-logo">
-            <a href="{{ $dashboard_url }}">
-                <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
-            </a>
-        </div>
+<div class="row mt-2">
+<div class="col-6">
+  
+</div>
 
-        {{-- Card Box --}}
-        <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
+<div class="col-6 login-page" style="background-color: white;">
 
-            {{-- Card Header --}}
-            @hasSection('auth_header')
-                <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
-                    <h3 class="card-title float-none text-center">
-                        @yield('auth_header')
-                    </h3>
-                </div>
-            @endif
 
-            {{-- Card Body --}}
-            <div class="card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                @yield('auth_body')
+
+  <div class="{{ $auth_type ?? 'login' }}-box">
+
+    {{-- Logo --}}
+    <div class="{{ $auth_type ?? 'login' }}-logo">
+        <a href="{{ $dashboard_url }}">
+            <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
+            {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+        </a>
+    </div>
+
+    {{-- Card Box --}}
+    <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
+
+        {{-- Card Header --}}
+        @hasSection('auth_header')
+            <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
+                <h3 class="card-title float-none text-center">
+                    @yield('auth_header')
+                </h3>
             </div>
+        @endif
 
-            {{-- Card Footer --}}
-            @hasSection('auth_footer')
-                <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
-                    @yield('auth_footer')
-                </div>
-            @endif
-
+        {{-- Card Body --}}
+        <div class="card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
+            @yield('auth_body')
         </div>
+
+        {{-- Card Footer --}}
+        @hasSection('auth_footer')
+            <div class="card-footer {{ config('adminlte.classes_auth_footer', '') }}">
+                @yield('auth_footer')
+            </div>
+        @endif
 
     </div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+ 
 @stop
 
 @section('adminlte_js')
