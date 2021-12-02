@@ -52415,4 +52415,10 @@ a.text-muted:hover {
 .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:hover, .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:focus {
   color: #3f474e;
 }
+ /* Requerimientos Plugin paises  */
+            .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/img/flags.png");}
+
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/img/flags@2x.png");}
+            }
 /*# sourceMappingURL=adminlte.css.map */

@@ -81,7 +81,7 @@
 
 
     <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
+        <p>- O -</p>
         <a href="{{url('login/facebook')}}" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i> Iniciar sesión usando Facebook
         </a>

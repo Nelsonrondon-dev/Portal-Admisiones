@@ -22,13 +22,13 @@
 
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 p-0">
         <nav class="navbar navbar-expand navbar-primary navbar-dark" style="background-color: #01385e;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a href="/" class="brand-link mb-2">
-                  <img src="https://www.eadic.info/wp-content/uploads/2021/08/Eadic-Online-Blanco.png" alt="AdminLTE Logo" class="brand-image " style="max-height: 60px;" >
+              <li class="nav-item ">
+                <a href="/" class="brand-link p-0">
+                  <img src="https://www.eadic.info/wp-content/uploads/2021/08/Eadic-Online-Blanco.png" alt="AdminLTE Logo" class="brand-image mb-2 mt-2 ml-sm-5" style="max-height: 8vh;" >
                 </a>
               </li>
              
@@ -176,17 +176,75 @@
     
 </div>
 
-
-<div class="row mt-2">
-<div class="col-6">
-  
+<div class="container">
+  <div class="row mt-5">
+  <h1>Título</h1>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga debitis beatae ipsum, odio ipsam est incidunt dolores sunt corporis quidem doloribus? Adipisci corrupti iusto facilis, ratione cupiditate qui nostrum laudantium.</p>
+</div>
 </div>
 
-<div class="col-6 login-page" style="background-color: white;">
+<div class="container">
+  <div class="row ">
+
+<div class="col-md-6 col-sm-12">
+  <div class="contanier mt-5">
+    <div class="row">
+      <div class="attachment-block clearfix">
+        <img class="attachment-img p-3" src="{{ asset('img/ico-users-2.png') }}" alt="Attachment Image">
+
+        <div class="attachment-pushed">
+          <h6 class="attachment-heading login-logo" style="font-size: 1.3em;text-align: left;font-weight: 500;"><a href="#">1. CREA TU CUENTA</a></h4>
+
+          <div class="attachment-text">
+            Description about the attachment can be placed here.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+          </div>
+          <!-- /.attachment-text -->
+        </div>
+        <!-- /.attachment-pushed -->
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="attachment-block clearfix">
+        <img class="attachment-img p-3" src="{{ asset('img/ico-register-2.png') }}" alt="Attachment Image">
+
+        <div class="attachment-pushed">
+          <h6 class="attachment-heading login-logo" style="font-size: 1.3em;text-align: left;font-weight: 500;"><a href="#">2. RELLENA EL FORMULARIO DE SOLICITUD</a></h4>
+
+          <div class="attachment-text">
+            Description about the attachment can be placed here.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+          </div>
+          <!-- /.attachment-text -->
+        </div>
+        <!-- /.attachment-pushed -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="attachment-block clearfix">
+        <img class="attachment-img p-3" src="{{ asset('img/ico-talk-2.png') }}" alt="Attachment Image">
+
+        <div class="attachment-pushed">
+          <h6 class="attachment-heading login-logo" style="font-size: 1.3em;text-align: left;font-weight: 500;"><a href="#">3. ENTREVISTA CON EL EQUIPO DE ADMISIONES</a></h4>
+
+          <div class="attachment-text">
+            Description about the attachment can be placed here.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+          </div>
+          <!-- /.attachment-text -->
+        </div>
+        <!-- /.attachment-pushed -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-sm-12 login-page" style="background-color: white;">
 
 
 
-  <div class="{{ $auth_type ?? 'login' }}-box">
+  <div class="{{ $auth_type ?? 'login' }}-box " style="margin-top: -15vh;">
 
     {{-- Logo --}}
     <div class="{{ $auth_type ?? 'login' }}-logo">
@@ -229,6 +287,8 @@
 
 
 </div>
+</div>
+
 
 
 

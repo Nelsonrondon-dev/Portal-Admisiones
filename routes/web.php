@@ -17,11 +17,16 @@ Route::get('/', function () {
     return view('home');
 })->name('home')->middleware('auth');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', function() {
     return view('home');
 })->name('home')->middleware('auth');
+
+
+Route::get('/profile', function() {
+    return view('profile');
+})->name('profile')->middleware('auth');
 
 Auth::routes();
 
@@ -30,5 +35,11 @@ Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::put('data/{id}', 'DataController@update');
+
+// Route::resource( 'datas/{data}','DataController');
+
+// Route::resource('data', 'DataController');
 
 
+Route::patch('/datas/{data}', 'DataController@update')->name('datas.update');

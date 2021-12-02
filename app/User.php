@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\SocialProfile;
+use App\ExamCode;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'url','youtube'
     ];
 
     /**
@@ -66,5 +67,10 @@ class User extends Authenticatable
     public function SocialProfiles(){
 
         return $this->hasMany(SocialProfile::class);
+    }
+
+    public function ExamCodes(){
+
+        return $this->hasMany(ExamCode::class);
     }
 }

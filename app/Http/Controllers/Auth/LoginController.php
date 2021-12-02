@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\User;
+use App\ExamCode;
 use App\SocialProfile;
 
 use Illuminate\Http\Request;
@@ -70,8 +71,7 @@ class LoginController extends Controller
 
         $userSocialite = Socialite::driver($driver)->user();
         
-        $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
-                                        ->where('social_name', $driver)->first();
+        $social_profile = SocialProfile::where('social_id', $userSocialite->getId())->where('social_name', $driver)->first();
 
 
         if(!$social_profile){
@@ -83,6 +83,13 @@ class LoginController extends Controller
                     'name' => $userSocialite->getName(),
                     'email'=> $userSocialite->getEmail(),
                 ]);
+
+
+                $codigo = ExamCode::create([
+                    'user_id' => $user->id,
+                    'code_id' => uniqid(),
+                ]);
+
             }
 
 
