@@ -4,8 +4,8 @@
 @section('plugins.Select2', true)
 @section('content_header')
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
-
     <h3 id="saludos" class="m-0 text-dark">Hola, {{ Auth::user()->name }}</h3>
+    <a href="{{ route('resumen') }}" class="btn-flotante">Resumen de admisión</a>
 @stop
 
 @section('content')

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CompleteFormulario;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -81,17 +82,90 @@ class LoginController extends Controller
             $user = User::where('email', $userSocialite->getEmail())->first();
 
             if(!$user){
+
+
+
+                function getNombreSplit($full_name)
+                {
+                /* Convierto a mayascula */
+
+                /* separar el nombre completo en espacios */
+                $tokens = Str::of($full_name)->trim()->explode(' ');
+                /* arreglo donde se guardan las "palabras" del nombre */
+                $names = array();
+                /* palabras de apellidos (y nombres) compuetos */
+                $special_tokens = array('DA', 'DE', 'DEL', 'LA', 'LAS', 'LOS', 'MAC', 'MC', 'VAN', 'VON', 'Y', 'I', 'SAN', 'SANTA');
+
+                $prev = "";
+                foreach ($tokens as $token) {
+                    $_token = $token;
+                    if (in_array($_token, $special_tokens)) {
+                        $prev .= "$token ";
+                    } else {
+                        $names[] = $prev . $token;
+                        $prev = "";
+                    }
+                }
+                $apellido_paterno = '';
+                $apellido_materno = '';
+                $primer_nombre = '';
+                $segundo_nombre = '';
+                $validar_name = true;
+
+                $num_nombres = count($names);
+
+                switch ($num_nombres) {
+                    case 0:
+                        break;
+                    case 1:
+                        $primer_nombre = $names[0];
+                        break;
+                    case 2:
+                        $primer_nombre = $names[0];
+                        $apellido_paterno = $names[1];
+                        break;
+                    case 3:
+                        $primer_nombre = $names[0];
+                        $apellido_paterno = $names[1];
+                        $apellido_materno = $names[2];
+                        break;
+                    case 4:
+                        $apellido_paterno = $names[2];
+                        $apellido_materno = $names[3];
+                        $primer_nombre = $names[0];
+                        $segundo_nombre = $names[1];
+                        $validar_name = false;
+                        break;
+                    default:
+                        $apellido_paterno = "{$names[1]} {$names[2]}";
+                        $apellido_materno = $names[3];
+                        $primer_nombre = $names[0];
+
+                        unset($names[0], $names[1], $names[2], $names[3]);
+                        $segundo_nombre = implode(' ', $names);
+                        break;
+                }
+
+                return  ['Paterno' => $apellido_paterno, 
+                         'Materno' => $apellido_materno, 
+                         'primer_nombre' => $primer_nombre,
+                         'segundo_nombre' => $segundo_nombre, 
+                         'validar_name' => $validar_name];
+                }
+
+                $nombres =  getNombreSplit($userSocialite->getName());
+                $apellidos =  $nombres['Paterno']. ' ' . $nombres['Materno'];
+            
                 $user = User::create([
-                    'name' => $userSocialite->getName(),
+                    'name' =>  $nombres["primer_nombre"],
+                    'lastname' => $apellidos,
                     'email'=> $userSocialite->getEmail(),
                 ]);
-
 
                 $ExamCode = ExamCode::create([
                     'user_id' => $user->id,
                     'code_id' => uniqid(),
                 ]);
-
 
                 $Step = Step::create([
                     'user_id' => $user->id,

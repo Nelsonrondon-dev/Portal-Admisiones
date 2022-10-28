@@ -125,6 +125,8 @@
     {{-- Body Content --}}
     @yield('body')
 
+
+    
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -385,10 +387,48 @@ border: 1px solid #003DA6;
     margin-left:  3rem !important
 }
 
+
+.btn-flotante {
+	font-size: 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #ffffff;
+	border-radius: 5px;
+	letter-spacing: 2px;
+	background-color: #001489;
+	padding: 10px 15px;
+	position: fixed;
+	bottom: 40px;
+	left: 20px;
+	transition: all 300ms ease 0ms;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	z-index: 8888;
+    display: none;
+}
+.btn-flotante:hover {
+	background-color: #2c2fa5; /* Color de fondo al pasar el cursor */
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	transform: translateY(-7px);
+    color: white;
+}
+
+
 @media (max-width: 575.98px) { 
 
     #saludos {
         margin-left: .5rem !important
+}
+
+.btn-flotante {
+	font-size: 0.6em;
+	padding: 15px 15px;
+	bottom: 15px;
+	right: 20px;
+	display: inherit;
+	width: 45vw;
+	letter-spacing: 1px;
+	border-radius: 60px;
+	text-align: center;
 }
 
 }

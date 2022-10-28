@@ -4,6 +4,8 @@
 @section('plugins.Select2', true)
 @section('content_header')
     {{-- <h3 class="m-0 text-dark ml-5">Hola, {{ Auth::user()->name }}</h3> --}}
+    <a href="{{ route('resumen') }}" class="btn-flotante">Resumen de admisión</a>
+
 @stop
 
 @section('content')
@@ -137,8 +139,7 @@
     
                         <div class="card-body text-center" style="color: black">
                            
-                            <a href="https://www.youtube.com/watch?v=MFHbj9xWfZs" target="_blank" rel="noopener noreferrer">     <img src="{{asset('img/video-1.webp') }}" alt="DIMENSIÓN"  style="width: 100%;"> </a> <br><br>
-    
+                            <iframe class="mb-3" width="100%" height="auto" src="https://www.youtube.com/embed/MFHbj9xWfZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
                          <h3  style="color: black; font-size: 1.3em;margin-bottom: 1em;">Conoce el programa definitivo para convertirte 
                             en un BIM Champion</h3>
                             <a href="https://www.youtube.com/watch?v=MFHbj9xWfZs" target="_blank" rel="noopener noreferrer"><button type="button" class="btn btn-block btn-primary" style="background: linear-gradient(141.73deg, #54C8E8 20.22%, #0088C6 77.95%);
@@ -154,8 +155,7 @@
     
                         <div class="card-body text-center" style="color: black">
                            
-                            <a href="https://www.youtube.com/watch?v=sNn4FKLqKpA&t=88s" target="_blank" rel="noopener noreferrer"> <img src="{{asset('img/video-2.webp') }}" alt="DIMENSIÓN"  style="width: 100%;"></a> <br><br>
-    
+                            <iframe class="mb-3" width="100%" height="auto" src="https://www.youtube.com/embed/sNn4FKLqKpA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <h3  style="color: black; font-size: 1.3em;margin-bottom: 1em;">Metodología BIM, la innovación que marca el rumbo de la construcción</h3>
 
                                 <a href="https://www.youtube.com/watch?v=sNn4FKLqKpA&t=88s" target="_blank" rel="noopener noreferrer"><button type="button" class="btn btn-block btn-primary" style="background: linear-gradient(141.73deg, #54C8E8 20.22%, #0088C6 77.95%);
@@ -173,8 +173,7 @@
     
                         <div class="card-body text-center" style="color: black">
                            
-                            <a href="https://www.youtube.com/watch?v=JsZMJmu2u70&t=67s" target="_blank" rel="noopener noreferrer">      <img src="{{asset('img/video-3.webp') }}" alt="DIMENSIÓN"  style="width: 100%;"> </a> <br><br>
-    
+                            <iframe class="mb-3" width="100%" height="auto" src="https://www.youtube.com/embed/JsZMJmu2u70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
                             <h3  style="color: black; font-size: 1.3em;margin-bottom: 1em;">Conoce el programa definitivo para convertirte 
                                 en un BIM Champion</h3>
 

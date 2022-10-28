@@ -4,6 +4,7 @@
 @section('plugins.Select2', true)
 @section('content_header')
 <h3 id="saludos" class="m-0 text-dark">Hola, {{ Auth::user()->name }}</h3>
+<a href="{{ route('resumen') }}" class="btn-flotante">Resumen de admisión</a>
 @stop
 
 @section('content')
@@ -22,16 +23,10 @@
 
                 <div class="card-body">
 
-
-
                     @isset($Steps)
-
 
                     <div id="stepper3" class="bs-stepper" bis_skin_checked="1">
                         <div class="bs-stepper-header" role="tablist" bis_skin_checked="1">
-
-                          
-
 
 
                             <div id="step1" class="step {{ (($Steps->step1 == 'completado') ? 'active' : "" )}}" data-target="#test-nlf-1" bis_skin_checked="1">
@@ -256,9 +251,6 @@
 
                     </div>
 
-                    {{-- <div class="card-footer">
-                        <button type="submit" class="btn btn-success float-right">Guardar y Continuar</button>
-                    </div> --}}
 
 
                     @else
@@ -279,35 +271,11 @@
                 </div>
 
 
-
-
-         
-
-
             </div>
             <!-- /.card-header -->
          
 
-           
-
-
-
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -395,49 +363,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-{{-- 
-    @php
-                            
-    if (isset($Steps)) {
-        if ($Steps->step1 = 'completado';){
-            $valor1 = 'active';
-        }
-
-        if ($Steps->step2 = 'completado';){
-            $valor2 = 'active';
-        }
-
-        if ($Steps->step3 = 'completado';){
-            $valor3 = 'active';
-        }
-
-        if ($Steps->step4 = 'completado';){
-            $valor4 = 'active';
-        }
-        if ($Steps->step5 = 'completado';){
-            $valor5 = 'active';
-        }
-    } else {
-        $valor1= '';
-        $valor2= '';
-        $valor3= '';
-        $valor4= '';
-        $valor5= '';
-    }
-    
-@endphp --}}
-
-
-
-
 
 
 
