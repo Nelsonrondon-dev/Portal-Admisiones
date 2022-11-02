@@ -89,30 +89,30 @@ Web portal made to measure made in Laravel 7. For the company EADIC, to support 
 
 ## Screenshots Project
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/login-eadic.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/login-eadic.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-1.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-1.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-2.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-2.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-3.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-3.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-4.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-4.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-5.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/paso-5.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/Resumen.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/Resumen.png)
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/conoce-mas.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/conoce-mas.png)
 
 
-![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/perfil.webp)
+![Portal-Admisiones](https://eadic.org/portal-admisiones/public/img/perfil.png)
 
 
 ## Used By
