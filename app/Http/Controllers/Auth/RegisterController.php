@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\ExamCode;
+use App\Role;
 use App\Step;
 use App\SocialProfile;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -84,8 +85,6 @@ class RegisterController extends Controller
                 'user_id' => $user->id,
                 'code_id' => uniqid(),
             ]);
-
-
         
         $social_profile = SocialProfile::create([
             'user_id' => $user->id,
@@ -93,6 +92,8 @@ class RegisterController extends Controller
             'social_name' => 'default',
             'social_avatar'  => 'https://eadic.org/portal-admisiones/public/img/default.png'
         ]);
+
+        $user->roles()->attach(Role::where('name', 'user')->first());
 
         Mail::to($user->email)
         ->send(new CompleteFormulario($ExamCode));

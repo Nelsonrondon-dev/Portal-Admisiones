@@ -43,9 +43,8 @@ class User extends Authenticatable
 
     
     public function adminlte_image(){
-        
         $social_profile = $this->socialProfiles->first();
-
+        
         if($social_profile){
             return $social_profile->social_avatar;
         }else{
@@ -66,16 +65,12 @@ class User extends Authenticatable
     //Relacion uno a mochos
 
     public function SocialProfiles(){
-
         return $this->hasMany(SocialProfile::class);
     }
 
     public function ExamCodes(){
-
         return $this->hasMany(ExamCode::class);
     }
-
-
 
     public function masters()
     {
@@ -83,6 +78,38 @@ class User extends Authenticatable
     }
 
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
    
-
+    public function authorizeRoles($roles)
+    {
+        abort_unless($this->hasAnyRole($roles), 401);
+        return true;
+    }    
+    
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasRole($roles)) {
+                 return true; 
+            }   
+        }
+        return false;
+    }
+    
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
 }

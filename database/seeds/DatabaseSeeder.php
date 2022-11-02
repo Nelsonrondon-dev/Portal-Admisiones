@@ -18,5 +18,18 @@ class DatabaseSeeder extends Seeder
             'email' => 'nelsonrondon36@gmail.com',
             'password' => Hash::make('rondon'),
         ]);
+
+
+        DB::table('roles')->insert([
+            'name' => 'admin',
+            'description' => 'Perfil de Administrador',
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => 'user',
+            'description' => 'Perfil de Usuario',
+        ]);
+        
+
     }
 }

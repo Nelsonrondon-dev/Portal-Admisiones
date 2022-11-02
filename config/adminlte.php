@@ -234,37 +234,47 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        ['header' => 'PASOS'],
+        ['header' => 'PASOS',
+        'roles' => 'user',
+        ],
         [
             'text'        => 'Completa tus datos',
             'url'         => 'completa-tus-datos',
             'icon'        => 'far fa-circle fa-fw ',
+            'roles' => 'user',
         ],
         [
             'text'        => 'Completa tu diagnóstico',
             'url'         => 'diagnostico',
             'icon'        => 'far fa-circle fa-fw ',
+            'roles' => 'user',
         ],
         [
             'text'        => 'Agenda tu asesoría',
             'url'         => 'asesoria-personalizada',
             'icon'        => 'far fa-circle fa-fw ',
+            'roles' => 'user',
         ],
         [
             'text'        => 'Finaliza tu admisión',
             'url'         => 'finaliza',
             'icon'        => 'far fa-circle fa-fw ',
+            'roles' => 'user',
         ],
         [
             'text'        => 'Formaliza tu matriculación',
             'url'         => 'formaliza',
             'icon'        => 'far fa-circle fa-fw ',
+            'roles' => 'user',
         ],
-        ['header' => 'admission_summary'],
+        ['header' => 'admission_summary',
+        'roles' => 'user',
+        ],
         [
             'text' => 'Resumen',
             'url'  => 'resumen',
             'icon' => 'fas fa-clipboard-check fa-fw',
+            'roles' => 'user',
         ],
         ['header' => 'account_settings'],
         [
@@ -276,6 +286,7 @@ return [
             'text' => 'Sobre EADIC',
             'url'  => 'sobre-eadic',
             'icon' => 'fas fa-fw fa-university',
+            'roles' => 'user',
         ],
     ],
 
@@ -299,6 +310,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        App\Filters\RoleMenuFilter::class,
     ],
 
     /*

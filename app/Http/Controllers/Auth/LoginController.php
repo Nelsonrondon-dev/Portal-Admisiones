@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\User;
+use App\Role;
 use App\ExamCode;
 use App\Step;
 use App\SocialProfile;
@@ -172,6 +173,8 @@ class LoginController extends Controller
                 ]);
 
 
+                $user->roles()->attach(Role::where('name', 'user')->first());
+
                 Mail::to($user->email)
                 ->send(new CompleteFormulario($ExamCode));
 
@@ -192,6 +195,5 @@ class LoginController extends Controller
     }
 
     
-
     
 }
