@@ -1166,13 +1166,6 @@
 
 
 
-
-
-
-
-
-
-
         <div class="col-md-3 col-12">
 
             <div class="sticky-top">
@@ -1231,9 +1224,6 @@
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
-
-
-
 
 
                     <div class="col-12 mb-1">

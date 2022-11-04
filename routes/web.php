@@ -73,6 +73,10 @@ Route::patch('asesoria-personalizada/update/{id}', 'CalendarController@update')-
 Route::delete('asesoria-personalizada/destroy/{id}', 'CalendarController@destroy')->name('cita.destroy');
 
 
+
+Route::resource('/usuarios', 'UserController')->middleware('auth');
+
+
 /* Borrar cache */ 
 
 Route::get('/clear-cache', function() {

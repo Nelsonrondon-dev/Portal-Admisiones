@@ -276,6 +276,16 @@ return [
             'icon' => 'fas fa-clipboard-check fa-fw',
             'roles' => 'user',
         ],
+
+        ['header' => 'admission_summary',
+        'roles' => 'admin',
+        ],
+        [
+            'text' => 'Usuarios',
+            'url'  => 'usuarios',
+            'icon' => 'fas fa-users fa-fw',
+            'roles' => 'admin',
+        ],        
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

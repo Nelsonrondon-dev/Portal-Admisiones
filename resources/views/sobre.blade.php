@@ -299,7 +299,6 @@
                 margin-bottom: -10vh !important;
                 margin-left: 2vw !important;
                 margin-right: 2vw !important;
-
             }
 
 
