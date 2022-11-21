@@ -112,28 +112,39 @@ class RegisterController extends Controller
             $url = "https://eadic.org/portal-admisiones/storage/app/".$pdf;
            // $end->curriculum = $url;
         } else {
-            $url = $end->curriculum;
+
+            if ($end) {
+                $url = $end->curriculum;
+            }
+            else {
+                $url = '';
+            }
+           
         }
 
 
+        if ($request->master) {
+           
+            // determinamos si existe una relacion asociada a este ususario
+            $relacion =  RelacionUserMaster::where('user_id', $id)->first();
 
-        // determinamos si existe una relacion asociada a este ususario
-       $relacion =  RelacionUserMaster::where('user_id', $id)->first();
+            // Buscamos el master asociado al codigo pasado  en el request 
+            $master = Master::where('codigo', $request->master)->first();
 
-       // Buscamos el master asociado al codigo pasado  en el request 
-       $master = Master::where('codigo', $request->master)->first();
+                if ($relacion != null) {
+                    $relacion->master_id = $master->id;
+                    $relacion->update();
+                }
+                else {
+                    RelacionUserMaster::create([
+                        'user_id' => $id,
+                        'master_id' => $master->id,
+                    ]);
+                };
 
-        if ($relacion != null) {
-            $relacion->master_id = $master->id;
-            $relacion->update();
         }
-        else {
-            RelacionUserMaster::create([
-                'user_id' => $id,
-                'master_id' => $master->id,
-            ]);
-        };
 
+     
 
         // Request PASO 2
 

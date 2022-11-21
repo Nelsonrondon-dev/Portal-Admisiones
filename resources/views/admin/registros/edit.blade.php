@@ -549,10 +549,6 @@
                         </div>
                         <!-- /.card-body -->
 
-                        {{-- <div class="card-footer">
-                            <button type="submit" class="btn btn-success float-right">Actualizar Usuario</button>
-                        </div> --}}
-
 
                     </div>
                 </div>
@@ -1034,10 +1030,6 @@
                         <!-- /.card-body -->
 
 
-                        {{-- <div class="card-footer">
-                           <button type="submit" class="btn btn-success float-right">Actualizar Usuario</button>
-                       </div> --}}
-
                     </div>
                 </div>
 
@@ -1164,7 +1156,7 @@
                             <div class="col-md-6 col-12">
 
                                 <div class="form-group">
-                                    <label>Ha completado el paso 5</label>
+                                    <label>Respuesta de admisión</label>
                                     <select id="step6" name="step6" class="form-control" value="{{$step->step6}}">
                                         <option value="" selected="" disabled="">Selecione *</option>
                                         <option value="opcion_1">Opción 1</option>
@@ -1259,7 +1251,7 @@
 
                                     
                                 <div class="form-group">
-                                    <label>Ha completado el paso 5</label>
+                                    <label>Respuesta de admisión</label>
                                     <select id="step6" name="step6" class="form-control" value="">
                                         <option value="" selected="" disabled="">Selecione *</option>
                                         <option value="opcion_1">Opción 1</option>
@@ -1283,11 +1275,6 @@
   
                         </div>
                         <!-- /.card-body -->
-
-
-                        {{-- <div class="card-footer">
-                           <button type="submit" class="btn btn-success float-right">Actualizar Usuario</button>
-                       </div> --}}
 
                     </div>
                 </div>
@@ -1377,11 +1364,6 @@
         }
     </style>
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css"
-        integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA=="
-        crossorigin="anonymous" /> --}}
-
-
     <link rel="stylesheet" href="{{ asset('/vendor/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
@@ -1404,7 +1386,7 @@
         // Inicializar el input de Telefonos input 0 
         var input0 = document.querySelector('#telefono0');
         window.intlTelInput(input0, {
-            initialCountry: '{{ $user->country }}',
+            initialCountry: '{{ ($user->country == '') ?  "auto" : $user->country }}',
             autoHideDialCode: true,
             separateDialCode: true,
             preferredCountries: ['mx', 'us', 'es'],
@@ -1429,19 +1411,19 @@
             }
         });
 
-        var iti = window.intlTelInputGlobals.getInstance(input0);
-        iti.isValidNumber();
+        var iti0 = window.intlTelInputGlobals.getInstance(input0);
+        iti0.isValidNumber();
 
 
         // Inicializar el input de Telefonos input 1 
 
         var input1 = document.querySelector('#telefono1');
         window.intlTelInput(input1, {
-            initialCountry: '{{ $user->country }}',
+            initialCountry: '{{ ($user->country == '') ?  "auto" : $user->country }}',
             autoHideDialCode: true,
             separateDialCode: true,
             preferredCountries: ['mx', 'us', 'es'],
-            hiddenInput: "full_phone",
+            hiddenInput: "full_phone1",
             autoPlaceholder: '(000) 000 0000',
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.min.js",
             geoIpLookup: function(callback) {
@@ -1454,7 +1436,7 @@
                     throw new Error('Failed: ' + response.status)
                 }).then(ipjson => {
                     callback(ipjson.country);
-                    pais();
+                    pais(iti0);
 
                 }).catch(e => {
                     callback('es')
@@ -1462,18 +1444,18 @@
             }
         });
 
-        var iti = window.intlTelInputGlobals.getInstance(input1);
-        iti.isValidNumber();
+        var iti1 = window.intlTelInputGlobals.getInstance(input1);
+        iti1.isValidNumber();
 
 
         var input2 = document.querySelector('#telefono2');
 
         window.intlTelInput(input2, {
-            initialCountry: '{{ $user->country }}',
+            initialCountry: '{{ ($user->country == '') ?  "auto" : $user->country}}',
             autoHideDialCode: true,
             separateDialCode: true,
             preferredCountries: ['mx', 'us', 'es'],
-            hiddenInput: "full_phone",
+            hiddenInput: "full_phone2",
             autoPlaceholder: '(000) 000 0000',
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.min.js",
             geoIpLookup: function(callback) {
@@ -1494,15 +1476,15 @@
             }
         });
 
-        var iti = window.intlTelInputGlobals.getInstance(input2);
-        iti.isValidNumber();
+        var iti2 = window.intlTelInputGlobals.getInstance(input2);
+        iti2.isValidNumber();
 
 
         $('.js-example-basic-multiple').select2({
             placeholder: "Seleciona un país",
             allowClear: true,
             //	containerCssClass: ':all:',
-            value: 've'
+            value: 'ES'
         });
 
         $('#timezone').select2({
@@ -1513,7 +1495,7 @@
 
 
 
-        function pais() {
+        function pais(iti) {
             var pais = iti.getSelectedCountryData().iso2;
             $('.js-example-basic-multiple').val(pais.toUpperCase()).trigger('change');
             var pais2 = $("#pais").val();
@@ -1522,7 +1504,7 @@
         }
 
         input0.addEventListener("countrychange", function(e) {
-            pais();
+            pais(iti0);
         });
 
         $('.js-example-basic-multiple').change(function() {
@@ -1538,7 +1520,9 @@
 
         });
 
+        @if ($user->country)
         $("#pais").val("{{ $user->country }}").trigger('change');
+        @endif
         $("#master").val("{{ $user->master }}").trigger('change');
     </script>
 
