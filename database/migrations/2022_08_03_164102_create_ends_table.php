@@ -19,7 +19,7 @@ class CreateEndsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
-            $table->string('curriculum');
+            $table->string('curriculum')->nullable();
             $table->string('name_1')->nullable();
             $table->string('lasname_1')->nullable();
             $table->string('phone_1')->nullable();

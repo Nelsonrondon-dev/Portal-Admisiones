@@ -285,7 +285,13 @@ return [
             'url'  => 'usuarios',
             'icon' => 'fas fa-users fa-fw',
             'roles' => 'admin',
-        ],        
+        ],       
+        [
+            'text' => 'Registros',
+            'url'  => 'registros',
+            'icon' => 'fa fa-list fa-fw',
+            'roles' => 'admin',
+        ],   
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

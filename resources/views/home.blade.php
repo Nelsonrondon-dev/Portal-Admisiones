@@ -933,7 +933,7 @@
             }
 
 
-        })
+        });
 
 
         // document.addEventListener('DOMContentLoaded', function () {

@@ -69,12 +69,17 @@ Route::get('/diagnostico/{id}', 'DiagnosticoController@update')->name('diagnosti
 // Calendar routes
 Route::get('asesoria-personalizada', 'CalendarController@index')->name('cita.index');
 Route::post('asesoria-personalizada', 'CalendarController@store')->name('cita.store');
+Route::post('asesoria-personalizada/update/{id}', 'CalendarController@storeAdmin')->name('cita.storeAdmin');
 Route::patch('asesoria-personalizada/update/{id}', 'CalendarController@update')->name('cita.update');
 Route::delete('asesoria-personalizada/destroy/{id}', 'CalendarController@destroy')->name('cita.destroy');
 
 
+// Módule User Routes
+Route::resource('/usuarios', 'UserController')->names('usuarios')->middleware('auth');
 
-Route::resource('/usuarios', 'UserController')->middleware('auth');
+// Módule Register Routes
+Route::resource('/registros', 'RegisterController')->names('registros')->middleware('auth');
+Route::post('registros/destroy/{id}', 'RegisterController@destroy')->name('registros.destroy');
 
 
 /* Borrar cache */ 

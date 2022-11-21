@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\vtwsclib\Vtiger;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CompleteAsesoria;
+use App\Mail\ReAgendarAsesoria;
+
 
 class CalendarController extends Controller
 {
@@ -56,6 +58,7 @@ class CalendarController extends Controller
         }
         return view('cita', ['events' => $events , 'Steps'=> $Step]);
     }
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -63,6 +66,15 @@ class CalendarController extends Controller
         ]);
 
         $id = Auth::user()->id;
+        $Users =  User::find($id);
+
+        $Master = $Users->masters->first();
+
+        if ( $Master == null ) {
+            return response()->json([
+                'error' => true,
+            ]);
+        }
 
         $bookingcount = Booking::where('user_id', $id)->count();
 
@@ -74,6 +86,7 @@ class CalendarController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'start_date_espana' => $request->start_date_espana,
+                'zona_horaria' => $request->zonaHoraria,
             ]);
     
             $color = null;
@@ -134,11 +147,7 @@ class CalendarController extends Controller
     
             $rs_log['log'] = $log;
             // return $rs_log;
-
-            $id = Auth::user()->id;
-            $Users =  User::find($id);
-            $Master = $Users->masters->first();
-
+ 
 
             $dataemail = [
                 'booking' => $booking,
@@ -147,7 +156,7 @@ class CalendarController extends Controller
             ];
 
 
-            Mail::to(Auth::user()->email)->send(new CompleteAsesoria($dataemail, Auth::user()->name));
+            Mail::to(Auth::user()->email)->send(new CompleteAsesoria($dataemail));
 
             $Step = Step::where('user_id',  Auth::user()->id)->first();
             $Step->step3 = "completado";
@@ -161,6 +170,7 @@ class CalendarController extends Controller
                 'title' => $booking->title,
                 'color' => $color ? $color: '',
                 'repetido' => false,
+                'error' => false,
                 // 'completado' => true,
             ]);
 
@@ -168,7 +178,7 @@ class CalendarController extends Controller
             else {
                 return response()->json([
                     'repetido' => true,
-        
+                    'error' => false,
                 ]);
             }
       
@@ -198,4 +208,113 @@ class CalendarController extends Controller
         $booking->delete();
         return $id;
     }
+
+    public function storeAdmin(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string'
+        ]);
+
+
+        $user =  User::find($id);
+
+        $master = $user->masters->first();
+
+        if ( $master == null ) {
+            return response()->json([
+                'error' => true,
+            ]);
+        }
+
+
+        $booking = Booking::create([
+            'user_id' => $request->id,
+            'title' => $request->title,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'start_date_espana' => $request->start_date_espana,
+            'zona_horaria' => $request->zonaHoraria,
+        ]);
+
+
+        $client =  new Vtiger();
+        $client->login();
+
+
+        // Se crea el Arrray con los datos recibidos
+        $data = [
+            'email' => $user->email,
+            //'firstname' => $request->name,
+            //'lastname' => $request->lastname,
+        ];
+
+      
+            $log = array();
+            $rs_log = array();
+            $rs = '';
+           // $exists_product = !empty($data['codigo_curso']);
+            $exists_account = $client->setAccount($data, true);
+            $exists_contact = $client->setContacts($data, true);
+            $exists_subscriber = $client->setSubscriber($data, true);
+
+            // se crea un lead si no exixte cuenta ni contacto
+
+            if ( $exists_subscriber == false &&   $exists_account == false && $exists_contact == false) {
+                $data['cf_1670'] = $booking->start_date_espana;
+
+                $rs = $client->setSubscriber($data);
+                $rs_log['subscriber'] = $rs;
+                $log[] = 'No contacto, No cuenta, se crear lead';
+            } else {
+                if ( $exists_subscriber !== false) {
+                    $data['cf_1670'] = $booking->start_date_espana;
+                    $rs = $client->setSubscriber($data);
+                    $rs_log['subscriber'] = $rs;
+                    $log[] = 'No producto, No contacto, No cuenta, pero si Subsrcritor actualiza';
+                    /**
+                     *  no hay cuenta o contacto pero si existe el suscirptor se actualiza lead
+                     */
+                }
+                else {
+                $log[] = 'Ya existe contacto y cuaeta solo hay que actualizar';
+                $data['cf_1026'] = $booking->start_date_espana;
+                $rs = $client->setAccount($data);
+                $rs_log['account'] = $rs;
+                $data['account_id'] = $rs['rs']['id'];
+                $rs = $client->setContacts($data);
+                $rs_log['contacts'] = $rs;
+                }   
+        }
+
+        $rs_log['log'] = $log;
+        
+
+
+        $dataemail = [
+            'booking' => $booking,
+            'user' =>  $user,
+            'master' => $master,
+        ];
+
+
+        Mail::to($user->email)->send(new ReAgendarAsesoria($dataemail));
+
+    
+        return response()->json([
+            'id' => $booking->id,
+            'start' => $booking->start_date,
+            'end' => $booking->end_date,
+            'zona_horaria' =>$booking->zona_horaria,
+            'title' => $booking->title,
+            'repetido' => false,
+            'error' => false,
+        ]);
+
+
+
+
+      
+    }
+
+
 }

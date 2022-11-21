@@ -191,8 +191,25 @@ class LoginController extends Controller
 
         auth()->login($social_profile->user);
 
-        return redirect()->route('home');
-    }
+        $user = User::where('email', $userSocialite->getEmail())->first();
+
+
+       
+            switch ($user->roles->first()->name) {
+                case 'admin':
+                    return redirect()->route('usuarios.index');
+                break;
+
+                case 'user':
+                    return redirect()->route('home');
+                break;
+                
+                default:
+                 return redirect()->route('home');
+                 break;
+            }
+
+}
 
     
     

@@ -23,6 +23,9 @@ class CreateBookingsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('start_date_espana');
+            $table->string('zona_horaria');
+
+            
             
             $table->timestamps();
         });

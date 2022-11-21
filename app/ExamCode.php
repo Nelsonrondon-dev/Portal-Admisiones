@@ -9,7 +9,6 @@ class ExamCode extends Model
 {
     protected $fillable = ['user_id', 'code_id'];
 
-    //relacion uno a mucho inversa
 
     public function user(){
 

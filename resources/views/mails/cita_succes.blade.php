@@ -162,11 +162,16 @@ div[style*="margin: 16px 0"] {
 						
 						<p style="font-family:'Arial', sans-serif, Verdana; color:#000000;text-align: justify; font-size: 13px;">	Un abrazo desde Madrid,</p>
 						
+						 
 						
+						
+
+
 
 						&nbsp;<br />
 						&nbsp;</p>
 
+						<p style="font-family:'Arial', sans-serif, Verdana; color:#000000;text-align: justify">Cordialmente,</p>
 
 						<p style="font-family:'Arial', sans-serif, Verdana; color:#000000;text-align: justify"><br />
 						&nbsp;</p>

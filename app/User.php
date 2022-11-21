@@ -9,6 +9,10 @@ use App\SocialProfile;
 use App\ExamCode;
 use App\RelacionUserMaster;
 use App\Master;
+use App\Step;
+use App\Booking;
+use App\End;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -112,4 +116,17 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function getSteps(){
+        return $this->hasMany(Step::class);
+    }
+
+    public function getEnds(){
+        return $this->hasMany(End::class);
+    }
+
+    public function getbookings(){
+        return $this->hasMany(Booking::class);
+    }
+
 }

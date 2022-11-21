@@ -542,7 +542,7 @@
                     console.log(result);
 
                     horas[0].innerText = ConvertToUnixTimestampFronDate(result.toTimestamp);
-                    
+
                     // console.log(horaactual);
 
                     for (let index = 1; index < horas.length; index++) {
@@ -579,14 +579,13 @@
             
                     <h5>Recuerda!</h5>
                         <p>Es importante asistas a tu asesoría personalizada el, ` + booking[0]['start'] +
-                            `</p><p>
+                    `</p><p>
                             <b>¿Tienes algún inconveniente?</b><br>
                             Si has tenido algún inconveniente con la fecha seleccionada, contacta a nuestro equipo de admisiones al correo: <a href="mailto:admisiones@eadic.es" target="_blank">admisiones@eadic.es</a>
                         </p>
                     </div>`;
 
                 targetDiv.innerHTML += mensaje;
-
             @endif ()
 
             var calendar = new Calendar(calendarEl, {
@@ -618,13 +617,16 @@
                         var start_date = $('#star').val();
                         var end_date = $('#end').val();
                         var start_date = start_date + ' ' + $('#hora').val();
-                        var mensaje ='Estas seguro de agendar tu asesoría personalizada para el ' + start_date + '';
+                        var mensaje =
+                            'Estas seguro de agendar tu asesoría personalizada para el ' +
+                            start_date + '';
                         var end_date = moment(start_date).add(30, 'minutes');
                         var start_date = moment(start_date).format('YYYY-MM-DDTHH:mm');
                         var end_date = moment(end_date).format('YYYY-MM-DDTHH:mm');
                         var zonaHoraria = moment.tz.guess();
                         var start_date_espana = $('#star').val() + ' ' + $('#horaespana').val();
-                        var start_date_espana = moment(start_date_espana).format('YYYY-MM-DDTHH:mm');
+                        var start_date_espana = moment(start_date_espana).format(
+                            'YYYY-MM-DDTHH:mm');
                         var id = {{ Auth()->user()->id }};
 
                         swal({
@@ -659,65 +661,92 @@
                                             end_date,
                                             id,
                                             start_date_espana,
+                                            zonaHoraria,
                                         },
                                         success: function(response) {
 
-                                            console.log(response.repetido);
 
-                                            if (response.repetido == false) {
+                                            if (response.error == true) {
 
-                                                $('#bookingModal').modal(
-                                                    'hide');
+                                                swal({
+                                                        title: 'Error',
+                                                        text: 'Disculpa, pero debes volver al paso anterior y selecionar un programa de interes',
+                                                        icon: "warning",
 
-                                                calendar.addEvent({
-                                                    'title': response
-                                                        .title,
-                                                    'start': response
-                                                        .start,
-                                                    'end': response.end,
-                                                    'color': response
-                                                        .color
-                                                });
+                                                    });
 
-                                                var targetDiv = document
-                                                    .getElementById('cita');
+                                                    setTimeout(function() {
+                                                        window.location
+                                                            .href =
+                                                            "https://eadic.org/portal-admisiones/public/completa-tus-datos";
+                                                    }, 5000);
+
+                                            } else {
+
+                                                if (response.repetido == false) {
+
+                                                    $('#bookingModal').modal(
+                                                        'hide');
+
+                                                    calendar.addEvent({
+                                                        'title': response
+                                                            .title,
+                                                        'start': response
+                                                            .start,
+                                                        'end': response
+                                                            .end,
+                                                        'color': response
+                                                            .color
+                                                    });
+
+                                                    var targetDiv = document
+                                                        .getElementById('cita');
 
 
-                                                var mensaje = `<div class="callout callout-info m-3">
+                                                    var mensaje = `<div class="callout callout-info m-3">
 
                                                     <h5>Recuerda!</h5>
                                                         <p>Es importante asistas a tu asesoría personalizada el ,` +
-                                                    response.start +
-                                                    `</p> <p>
+                                                        response.start +
+                                                        `</p> <p>
                                                                <b>¿Tienes algún inconveniente?</b><br>
                                                                   Si has tenido algún inconveniente con la fecha seleccionada, contacta a nuestro equipo de admisiones al correo: <a href="mailto:admisiones@eadic.es" target="_blank">admisiones@eadic.es</a>
                                                              </p>
                                                     </div>`;
-                                                targetDiv.innerHTML += mensaje;
-
-                                               
-
-                                                swal("¡Genial! Hemos agendado tu Asesoría personalizada con éxito, te hemos enviado un correo 📧 con la información de tu cita, recueda es importante asistas a tu asesoría, ya que esta sólo se podrá agendar una vez.", {
-                                                    icon: "success",
-                                                });
+                                                    targetDiv.innerHTML +=
+                                                        mensaje;
 
 
-                                                setTimeout( function() { window.location.href = "https://eadic.org/portal-admisiones/public/finaliza"; }, 5000 );
 
-                                            } else {
-                                                $('#bookingModal').modal('hide');
+                                                    swal("¡Genial! Hemos agendado tu Asesoría personalizada con éxito, te hemos enviado un correo 📧 con la información de tu cita, recueda es importante asistas a tu asesoría, ya que esta sólo se podrá agendar una vez.", {
+                                                        icon: "success",
+                                                    });
 
 
-                                                swal({
-                                                    title: 'Disculpa, solo puedes agendar una asesoría personalizada',
-                                                    text: 'Si deseas reprogramar tu cita envíanos un correo 📧 a admisiones@eadic.es',
-                                                    icon: "warning",
+                                                    setTimeout(function() {
+                                                        window.location
+                                                            .href =
+                                                            "https://eadic.org/portal-admisiones/public/finaliza";
+                                                    }, 5000);
 
-                                                });
+                                                } else {
+                                                    $('#bookingModal').modal(
+                                                        'hide');
 
+                                                    swal({
+                                                        title: 'Disculpa, solo puedes agendar una asesoría personalizada',
+                                                        text: 'Si deseas reprogramar tu cita envíanos un correo 📧 a admisiones@eadic.es',
+                                                        icon: "warning",
+
+                                                    });
+
+
+
+                                                }
 
 
                                             }
+
 
 
 
@@ -808,56 +837,55 @@
 
             @isset($Steps)
 
-                var steps =  document.querySelectorAll('.nav li a i[class~="fa-circle"]');
+                var steps = document.querySelectorAll('.nav li a i[class~="fa-circle"]');
 
-                var setp1 =   {{ (($Steps->step1 == 'completado') ? 'true' : 'false' )}};
-                var setp2 =   {{ (($Steps->step2 == 'completado') ? 'true' : 'false' )}};
-                var setp3 =   {{ (($Steps->step3 == 'completado') ? 'true' : 'false' )}};
-                var setp4 =   {{ (($Steps->step4 == 'completado') ? 'true' : 'false' )}};
-                var setp5 =   {{ (($Steps->step5 == 'completado') ? 'true' : 'false' )}};
+                var setp1 = {{ $Steps->step1 == 'completado' ? 'true' : 'false' }};
+                var setp2 = {{ $Steps->step2 == 'completado' ? 'true' : 'false' }};
+                var setp3 = {{ $Steps->step3 == 'completado' ? 'true' : 'false' }};
+                var setp4 = {{ $Steps->step4 == 'completado' ? 'true' : 'false' }};
+                var setp5 = {{ $Steps->step5 == 'completado' ? 'true' : 'false' }};
 
 
                 if (setp1) {
 
-                steps[0].classList.remove("far")
-                steps[0].classList.remove("fa-circle");
-                steps[0].classList.add("fa-check");
-                steps[0].classList.add("fas");
+                    steps[0].classList.remove("far")
+                    steps[0].classList.remove("fa-circle");
+                    steps[0].classList.add("fa-check");
+                    steps[0].classList.add("fas");
 
                 }
 
 
                 if (setp2) {
-                steps[1].classList.remove("far")
-                steps[1].classList.remove("fa-circle");
-                steps[1].classList.add("fa-check");
-                steps[1].classList.add("fas");
+                    steps[1].classList.remove("far")
+                    steps[1].classList.remove("fa-circle");
+                    steps[1].classList.add("fa-check");
+                    steps[1].classList.add("fas");
                 }
 
 
                 if (setp3) {
-                steps[2].classList.remove("far")
-                steps[2].classList.remove("fa-circle");
-                steps[2].classList.add("fa-check");
-                steps[2].classList.add("fas");
+                    steps[2].classList.remove("far")
+                    steps[2].classList.remove("fa-circle");
+                    steps[2].classList.add("fa-check");
+                    steps[2].classList.add("fas");
                 }
 
 
-                if (setp4 ) {
-                steps[3].classList.remove("far")
-                steps[3].classList.remove("fa-circle");
-                steps[3].classList.add("fa-check");
-                steps[3].classList.add("fas");
+                if (setp4) {
+                    steps[3].classList.remove("far")
+                    steps[3].classList.remove("fa-circle");
+                    steps[3].classList.add("fa-check");
+                    steps[3].classList.add("fas");
                 }
 
                 if (setp5) {
-                steps[4].classList.remove("far")
-                steps[4].classList.remove("fa-circle");
-                steps[4].classList.add("fa-check");
-                steps[4].classList.add("fas");
+                    steps[4].classList.remove("far")
+                    steps[4].classList.remove("fa-circle");
+                    steps[4].classList.add("fa-check");
+                    steps[4].classList.add("fas");
                 }
-
-                @endisset
+            @endisset
 
             $("#llamameahora").click(function() {
 
