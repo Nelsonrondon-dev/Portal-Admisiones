@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Step;
+use App\Master;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -28,9 +29,9 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $Steps = Step::where('user_id', $id)->first();
+        $masters = Master::all();
 
-
-        return view('home', ['Steps'=> $Steps]);
+        return view('home', ['Steps'=> $Steps, 'masters' => $masters ]);
     }
 
     public function profile()

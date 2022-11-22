@@ -13,7 +13,7 @@ class Master extends Model
 
 
     protected $fillable = [
-        'name', 'codigo', 'url', 'imagen_banner_g','imagen_banner_p','folleto'
+        'name', 'codigo', 'url', 'folleto'
     ];
 
 

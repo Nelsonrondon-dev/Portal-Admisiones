@@ -59,6 +59,10 @@ Route::get('/resumen', 'StepController@index')->name('resumen');
 /* Master rutes  */
 
 Route::get('/master/{codigo}', 'MasterController@index')->name('master');
+Route::resource('/masters', 'MasterController')->names('masters');
+Route::get('/masters', 'MasterController@indexAdmin')->name('masters');
+
+
 
 /* Diagnostico rutes  */
 

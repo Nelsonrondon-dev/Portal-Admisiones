@@ -292,6 +292,12 @@ return [
             'icon' => 'fa fa-list fa-fw',
             'roles' => 'admin',
         ],   
+        [
+            'text' => 'Oferta formativa',
+            'url'  => 'masters',
+            'icon' => 'fa fa-graduation-cap fa-fw',
+            'roles' => 'admin',
+        ],   
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

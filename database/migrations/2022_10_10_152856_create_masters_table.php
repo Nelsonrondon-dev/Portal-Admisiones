@@ -17,10 +17,6 @@ class CreateMastersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('codigo');
-        //    $table->string('url');
-            $table->string('imagen_banner_g');
-            $table->string('imagen_banner_p');
-
             $table->string('folleto');
 
 

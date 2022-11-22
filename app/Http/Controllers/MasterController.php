@@ -6,6 +6,9 @@ use App\Master;
 use Illuminate\Support\Facades\Auth;
 use App\Step;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMaster;
+
+
 
 class MasterController extends Controller
 {
@@ -34,6 +37,14 @@ class MasterController extends Controller
             
     }
 
+
+    public function indexAdmin() {
+
+        $masters = Master::all();
+
+        return view('admin.masters.index' , [ 'masters' => $masters] );
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +52,7 @@ class MasterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.masters.create');
     }
 
     /**
@@ -50,9 +61,15 @@ class MasterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreMaster $request)
+    { 
+        Master::create([
+            'name' => $request->name,
+            'codigo' => $request->codigo,
+            'folleto' => $request->folleto,
+        ]);
+
+        return redirect()->route('masters');
     }
 
     /**
@@ -72,9 +89,11 @@ class MasterController extends Controller
      * @param  \App\Master  $master
      * @return \Illuminate\Http\Response
      */
-    public function edit(Master $master)
+    public function edit( $id)
     {
-        //
+        $masters = Master::where('id', $id)->first();
+       
+        return view('admin.masters.edit' , [ 'masters' => $masters] );
     }
 
     /**
@@ -84,9 +103,20 @@ class MasterController extends Controller
      * @param  \App\Master  $master
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Master $master)
+    public function update(StoreMaster $request, $id)
     {
-        //
+
+
+        $master = Master::findOrFail($id);
+
+
+        $master->name = $request->name;
+        $master->codigo = $request->codigo;
+        $master->folleto = $request->folleto;
+       
+        $master->update();
+
+        return redirect()->route('masters');
     }
 
     /**
@@ -95,8 +125,11 @@ class MasterController extends Controller
      * @param  \App\Master  $master
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Master $master)
+    public function destroy( $id)
     {
-        //
+        $master = Master::findOrFail($id);
+        $master->delete();
+
+        return redirect()->route('masters');
     }
 }

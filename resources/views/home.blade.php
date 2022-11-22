@@ -365,7 +365,13 @@
                                         @endif
                                        
                         
-                                              <!-- Infraestructuras Civiles y de Transporte -->
+                                            @foreach ($masters as $master)
+                                            
+                                            <option value="{{$master->codigo}}">{{$master->name}}</option>
+
+                                            @endforeach
+
+                                              {{-- <!-- Infraestructuras Civiles y de Transporte -->
                                               <option style="font-weight: bold;" value="" disabled="">Infraestructuras Civiles y de Transporte</option>
                         
                                               <option value="MCARRE">- Máster en Diseño, Construcción y Mantenimiento de Carreteras </option>
@@ -410,7 +416,7 @@
                                               <option value="MBIMCR">- Máster BIM en Diseño y Construcción de Vías, Carreteras y Autopistas </option>
 
 
-                                              {{-- <option value="MBIMCI">- Máster Internacional en BIM Management en Infraestructuras e Ingeniería Civil </option> --}}
+                                              <!-- <option value="MBIMCI">- Máster Internacional en BIM Management en Infraestructuras e Ingeniería Civil </option> -->
                                           
                                           
                                               <option value="MBIMDIA">- Máster en Diseño de Interiores y gestión BIM de Proyectos de Arquitectura e Interiorismo </option>
@@ -474,7 +480,7 @@
                         
                                               <option value="" style="font-weight: bold;" disabled="">Arquitectura y Urbanismo</option>
                                               <option value="MARURB">- Máster en Arquitectura avanzada y urbanismos ambientalmente sostenibles </option>
-                                              <option value="MSMART">- Máster en infraestructuras urbanas inteligentes y urbanismo sostenible: Smart Cities </option>
+                                              <option value="MSMART">- Máster en infraestructuras urbanas inteligentes y urbanismo sostenible: Smart Cities </option> --}}
                                            
                         
                         
@@ -847,7 +853,6 @@
             width: 100%;
         }
 
-        ;
 
         .custom-file-label::after {
             content: "Buscar" !important;
@@ -911,12 +916,21 @@
             value: 've'
         });
 
+
+        $('#master').select2({
+            placeholder: "Seleciona tu programa de Interés",
+            allowClear: true,
+		    // containerCssClass: ':all:',
+            // value: 've'
+        });
+        
+
+
         function pais() {
             var pais = iti.getSelectedCountryData().iso2;
             $('.js-example-basic-multiple').val(pais.toUpperCase()).trigger('change');
             var pais2 = $("#pais").val();
             $("#pais-nombre").val($("#pais option[value='" + pais2 + "']")[0].text);
-
         }
 
         input.addEventListener("countrychange", function(e) {
@@ -929,7 +943,6 @@
             if ($(this)) {
                 var pais2 = $(this).val();
                 $("#pais-nombre").val($("#pais option[value='" + pais2 + "']")[0].text);
-
             }
 
 

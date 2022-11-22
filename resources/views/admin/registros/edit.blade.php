@@ -803,7 +803,7 @@
 
                                         <div class="col-md-6 col-12">
 
-                                            <p style="text-align: center;font-weight: bold;">Recomendación 1 </p>
+                                            <p style="text-align: center;font-weight: bold;">Recomendación 2 </p>
 
                                             <div class="form-group">
                                                 <label>Nombre</label>
@@ -960,7 +960,7 @@
 
                                     <div class="col-md-6 col-12">
 
-                                        <p style="text-align: center;font-weight: bold;">Recomendación 1 </p>
+                                        <p style="text-align: center;font-weight: bold;">Recomendación 2 </p>
 
                                         <div class="form-group">
                                             <label>Nombre</label>
