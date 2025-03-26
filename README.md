@@ -1,8 +1,6 @@
 <h1 align="center">Hi 👋, I'm Nelson Rondon</h1>
 <h3 align="center">A passionate Full Stack Web Developer from Venezuela</h3>
 
-- 🔭 I’m currently working on EADIC and WEEX.PRO
-
 - 📫 How to reach me **nelsonrondon36@gmail.com**
 
 
